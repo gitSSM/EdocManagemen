@@ -61,7 +61,7 @@
                 <td>${en.uploaduser}</td>
                 <td><fmt:formatDate value="${en.createdate}" pattern="yyyy-MM-dd"></fmt:formatDate> </td>
                 <td><a href="/edoc/update.html?id=${en.id}">修改</a>
-                <a id="ss" onsubmit="del(${en.id})"  href="/edoc/del.html?id=${en.id}">删除</a>
+                <a  href="/edoc/del.html?id=${en.id}">删除</a>
 
                 </td>
             </tr>

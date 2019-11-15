@@ -28,9 +28,8 @@ public class EdocController {
     public String getList(@RequestParam(value = "categoryId",required = false)String categoryId,
                           Model model
     ){
-        List<EdocEntry>  entryList = edocEntryService.getlist(categoryId);
-
         List<EdocCategory> categoryList=edocCategoryService.getlist();
+        List<EdocEntry>  entryList = edocEntryService.getlist(categoryId);
         model.addAttribute("entryList",entryList);
 
         model.addAttribute("categoryList",categoryList);
@@ -106,10 +105,12 @@ public class EdocController {
     public Object getDel(@RequestParam(value = "id",required = false)Integer id,Model model){
         boolean falg=edocEntryService.getDel(id);
         if (falg){
-            if (id!=null){
-                model.addAttribute("result",new Boolean(true));
-                return "redirect:/edoc/index.html";
-            }
+            List<EdocCategory> categoryList=edocCategoryService.getlist();
+            List<EdocEntry>  entryList = edocEntryService.getlist("");
+            model.addAttribute("entryList",entryList);
+
+            model.addAttribute("categoryList",categoryList);
+            model.addAttribute("result",new Boolean(true));
            return "index";
         }else {
             return "redirect:/edoc/index.html";
