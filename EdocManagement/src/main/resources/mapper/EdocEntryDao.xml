@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edo.dao.EdocEntryDao">
+    <!--查询所有分类表-->
+
+    <select id="getlist" resultType="com.edo.pojo.EdocEntry">
+
+      SELECT e.*,c.`name` FROM `edoc_entry` e INNER JOIN `edoc_category` c ON e.`categoryId`=c.id
+            <trim>
+                <if test="categoryId!=null and categoryId!=''">
+                WHERE
+                    e.`categoryId`=#{categoryId}</if>
+                ORDER BY e.`id` DESC
+            </trim>
+
+    </select>
+    <!--按id查询-->
+    <select id="getById" resultType="com.edo.pojo.EdocEntry">
+          SELECT * FROM `edoc_entry` WHERE id=#{id}
+    </select>
+    <delete id="getDel">
+      DELETE
+FROM `edoc_categorydb`.`edoc_entry`
+WHERE `id` = #{id}
+
+    </delete>
+    <!--修改-->
+    <update id="getUpdate">
+            UPDATE `edoc_categorydb`.`edoc_entry`
+            <trim prefix="set" suffixOverrides=",">
+                <if test="title!=null">`title` = #{title},</if>
+                <if test="summary!=null">`summary` = #{summary},</if>
+                <if test="uploaduser!=null">`uploaduser` = #{uploaduser},</if>
+                <if test="createdate!=null">  `createdate` = #{createdate}</if>
+                WHERE `id` = #{id}
+            </trim>
+
+    </update>
+
+    <!--添加-->
+    <insert id="getAdd">
+
+INSERT INTO `edoc_categorydb`.`edoc_entry`
+            (
+             `categoryId`,
+             `title`,
+             `summary`,
+             `uploaduser`,
+             `createdate`)
+VALUES (
+        #{categoryId},
+        #{title},
+        #{summary},
+        #{uploaduser},
+        #{createdate})
+    </insert>
+</mapper>

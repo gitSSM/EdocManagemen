@@ -1,36 +1,33 @@
-package com.edo.dao;
+package com.edo.service;
 
 import com.edo.pojo.EdocCategory;
 import com.edo.pojo.EdocEntry;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-/*
- * 电子文档条目表
- * */
 
-public interface EdocEntryDao {
-
+public interface EdocEntryService {
     /*
      *查询所有电子文档条目
      *
      * */
-    List<EdocEntry> getlist(@Param("categoryId")String categoryId );
-
+    List<EdocEntry> getlist(String categoryId );
     /**
      * 添加
      */
-    int getAdd(EdocEntry edocEntry);
+    boolean getAdd(EdocEntry edocEntry);
     /**
      * 修改
      */
-    int getUpdate(EdocEntry edocEntry);
+    boolean getUpdate(EdocEntry edocEntry);
     /**
      * 按id查询
      */
-    EdocEntry getById(@Param("id")String id);
+    EdocEntry getById(String id);
     /**
      * 删除
      */
-    int getDel(@Param("id")Integer id);
+    boolean getDel(Integer id);
+
+
 }
